@@ -10,5 +10,5 @@
 6. Firebase Hosting (To deploy the app)
 7. Vuelidate (Form validation)
 8. Vue Good Table (Smart & Complete table library)
-9. Bulma (CSS library)
+9. Bulma (CSS framework)
 10. Reusable components

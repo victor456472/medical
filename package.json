@@ -12,8 +12,12 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.7",
+    "bulma": "^0.9.4",
     "pinia": "^2.0.32",
+    "v-calendar": "^3.0.3",
     "vue": "^3.2.47",
+    "vue-good-table-next": "^0.2.1",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
