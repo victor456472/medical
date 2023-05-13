@@ -26,6 +26,7 @@
             const v$ = useVuelidate(rules, account)
             const isModalOpen = computed(()=>props.isOpen);
             const handleSubmit = async()=>{
+
                 const isFormValid = await v$.value.$validate()
                 if(!isFormValid) {
                     return
@@ -34,8 +35,12 @@
                 /* account.value.email=""
                 account.value.password=""
                 account.value.logged=true */
-                loginEmailPswd(account.value.email, account.value.password)
-                emit('hide')
+                const err = async() => {
+                    let data = await loginEmailPswd(account.value.email, account.value.password)
+                    console.log(data)
+                    emit('hide')
+                }
+                err()
             }
             return {
                 isModalOpen,
