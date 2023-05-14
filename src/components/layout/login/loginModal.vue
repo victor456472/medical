@@ -97,7 +97,7 @@
                     </div>
                 </div>
                 <div class="column is-12 mt-2">
-                    <button class="button is-primary is-fullwidth" @click="handleSubmit">Guardar</button>
+                    <button class="button is-primary is-fullwidth" @click="handleSubmit">Ingresar</button>
                 </div>
             </div>
         </div>
@@ -113,6 +113,7 @@
     right: 0;
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: #000000da;
     z-index: 9999;
     }
@@ -122,7 +123,7 @@
     height: auto; /*350px*/ 
     width: auto;/*500px */
     margin-top: 8%;
-    margin-bottom: 12%;
+    margin-bottom: 8%;
     margin-left: 25%;
     margin-right: 25%;
     padding: 2% 0;

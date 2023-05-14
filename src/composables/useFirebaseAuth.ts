@@ -12,7 +12,12 @@ export const useFirebaseAuth = () => {
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user
-            console.log(user)
+            signOut(auth).then(() => {
+                // Sign-out successful.
+            }).catch((error) => {
+                // An error happened.
+            });
+            //console.log(user)
             // ...
         })
         .catch((error) => {
@@ -26,7 +31,8 @@ export const useFirebaseAuth = () => {
         return signInWithEmailAndPassword (auth, email, password).then((userCredential) => {
             // Signed in
             const user = userCredential.user
-            console.log(user)
+            //console.log(user)
+            
             return "logged"
             // ...
         }).catch((error) => {

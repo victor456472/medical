@@ -76,8 +76,8 @@
                             <div class="control">
                                 <input v-model="v$.password.$model" class="input" type="password" />
                             </div>
-                            <p v-if="v$.password.minLength.$invalid" class="has-text-danger">la contraseña debe tener al menos 6 caracteres</p>
                             <p v-if="v$.password.required.$invalid" class="has-text-danger">Campo obligatorio</p>
+                            <p v-else-if="v$.password.minLength.$invalid" class="has-text-danger">la contraseña debe tener al menos 6 caracteres</p>
                         </div>
                     </div>
                     <div class="column is-12">
@@ -107,6 +107,7 @@
     right: 0;
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: #000000da;
     z-index: 9999;
     }
