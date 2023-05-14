@@ -1,5 +1,10 @@
 import { auth } from '../services/firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword  } from "firebase/auth";
+import { 
+    signOut, 
+    onAuthStateChanged, 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword  
+} from "firebase/auth";
 
 export const useFirebaseAuth = () => {
     const registEmailPswd = (email: string, password: string) => {
@@ -22,6 +27,7 @@ export const useFirebaseAuth = () => {
             // Signed in
             const user = userCredential.user
             console.log(user)
+            return "logged"
             // ...
         }).catch((error) => {
             const errorCode = error.code;
@@ -45,11 +51,18 @@ export const useFirebaseAuth = () => {
         });
             // Signed in
             // ...
-
-
+    }
+    const logOutFunc = () =>{
+        signOut(auth).then(() => {
+            // Sign-out successful.
+          }).catch((error) => {
+            // An error happened.
+          });
     }
     return {
         registEmailPswd,
         loginEmailPswd,
+        onAuthStateChanged,
+        logOutFunc
     }
 }

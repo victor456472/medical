@@ -7,5 +7,5 @@ export interface account {
 export interface accountLog {
     email: string;
     password: string;
-    logged: boolean;
+    //logged: boolean;
 }

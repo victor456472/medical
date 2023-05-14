@@ -10,18 +10,19 @@
         props: {
             isOpen: {type: Boolean, required: true}
         },
-        emits: ['hide'],
+        emits: ['hide','save'],//, 'save'
         setup(props, { emit }){
             const { loginEmailPswd } = useFirebaseAuth();
             const account = ref<accountLog>({
                 email: '',
                 password: '',
-                logged: false
+                //logged: false
             })
+            const errMess = ref('')
             const rules = computed(()=>({
                 email: {required},
                 password: {required},
-                logged: false
+                //logged: false
             }))
             const v$ = useVuelidate(rules, account)
             const isModalOpen = computed(()=>props.isOpen);
@@ -31,13 +32,18 @@
                 if(!isFormValid) {
                     return
                 }
-                //registEmailPswd(account.value.email, account.value.password)
-                /* account.value.email=""
-                account.value.password=""
-                account.value.logged=true */
                 const err = async() => {
                     let data = await loginEmailPswd(account.value.email, account.value.password)
-                    console.log(data)
+                    if(data === "logged"){
+                        //account.value.logged = true
+                        //emit('save', account.value.logged)
+                        emit('save')
+                    }else{
+                        errMess.value=data
+                        return
+                    }
+                    account.value.email = ""
+                    account.value.password = ""
                     emit('hide')
                 }
                 err()
@@ -46,7 +52,9 @@
                 isModalOpen,
                 emit,
                 handleSubmit,
-                v$
+                v$,
+                errMess,
+                account
             }
         }
     })
@@ -73,6 +81,9 @@
                                 <i class="fas fa-envelope"></i>
                             </span>
                         </div>
+                        <p v-if="errMess === 'no se encontro el correo'" class="has-text-danger">{{ errMess }}</p>
+                        <p v-else-if="errMess === 'el correo es invalido'" class="has-text-danger">{{ errMess }}</p>
+                        <p v-else-if="v$.email.$error" class="has-text-danger">este campo es obligatorio</p>
                     </div>
                 </div>
                 <div class="column is-12">
@@ -81,6 +92,8 @@
                         <div class="control">
                             <input v-model="v$.password.$model" class="input is-rounded" type="password" placeholder = "Password"/>
                         </div>
+                        <p v-if="v$.password.$error" class="has-text-danger">este campo es obligatorio</p>
+                        <p v-else-if="errMess === 'la contraseña no es correcta'" class="has-text-danger">{{ errMess }}</p>
                     </div>
                 </div>
                 <div class="column is-12 mt-2">
@@ -106,10 +119,13 @@
 
     .custom-modal {
     background-color: white;
-    height: 350px;
-    width: 500px;
-    margin-top: 7%;
-    padding: 40px 0;
+    height: auto; /*350px*/ 
+    width: auto;/*500px */
+    margin-top: 8%;
+    margin-bottom: 12%;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 2% 0;
     border-radius: 10px;
     }
     .close {
