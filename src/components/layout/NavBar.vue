@@ -74,12 +74,12 @@
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
         <a class="navbar-item"> <RouterLink to="/"> Home </RouterLink></a>
-        <a v-if="loggedFlag" class="navbar-item"> <RouterLink to="/ordenes-medicas"> Órdenes Médicas </RouterLink></a>
-        <a v-if="loggedFlag" class="navbar-item"> <RouterLink to="/medicamentos"> Medicamentos </RouterLink> </a>
+        <a v-if="loggedFlag" class="navbar-item" href="/ordenes-medicas"> <RouterLink to="/ordenes-medicas"> Órdenes Médicas </RouterLink></a>
+        <a v-if="loggedFlag" class="navbar-item" href="/medicamentos"> <RouterLink to="/medicamentos"> Medicamentos </RouterLink> </a>
       </div>
       <div class="navbar-end">
         <a v-if="!loggedFlag" class="navbar-item" @click="isModalLogOpen=true"> Login </a>
-        <a v-if="loggedFlag" class="navbar-item" @click="logOutFunc()"> <RouterLink to="/">Logout</RouterLink> </a>
+        <a v-if="loggedFlag" class="navbar-item" @click="logOutFunc()" href="/"><RouterLink to="/">Logout</RouterLink></a>
         <a v-if="!loggedFlag" class="navbar-item" @click="isModalSignupOpen=true"> Signup </a>
       </div>
     </div>
@@ -87,3 +87,5 @@
   <loginModal :is-open="isModalLogOpen" @hide="isModalLogOpen=false" /> <!-- @save="handleSubmit" -->
   <signupModal :is-open="isModalSignupOpen" @hide="isModalSignupOpen=false"/>
 </template>
+
+
